@@ -1,0 +1,33 @@
+# Version: 8.2.0.193 (959c1e4)
+# [first argument, ignore] # /Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/bin/iPhoneSimulator/Debug/mtouch.exe
+/Library/Frameworks/Xamarin.iOS.framework/Versions/8.2.0.193/bin/mtouch \
+	-sdkroot \
+	/Applications/Xcode.app/Contents/Developer \
+	--cache \
+	/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/obj/iPhoneSimulator/Debug/mtouch-cache \
+	--nomanifest \
+	--nosign \
+	-sim \
+	/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/bin/iPhoneSimulator/Debug/BeaconDemoiOS.app \
+	-r \
+	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/2.1/System.dll \
+	-r \
+	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/2.1/System.Xml.dll \
+	-r \
+	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/2.1/System.Core.dll \
+	-r \
+	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/2.1/monotouch.dll \
+	-r \
+	/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/../packages/Xamarin.Forms.1.2.3.6257/lib/MonoTouch10/Xamarin.Forms.Platform.iOS.dll \
+	-r \
+	/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/../packages/Xamarin.Forms.1.2.3.6257/lib/MonoTouch10/Xamarin.Forms.Core.dll \
+	-r \
+	/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/../packages/Xamarin.Forms.1.2.3.6257/lib/MonoTouch10/Xamarin.Forms.Xaml.dll \
+	-debug \
+	-nolink \
+	-sdk \
+	8.1 \
+	-targetver \
+	7.0 \
+	--abi=i386 \
+	/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/bin/iPhoneSimulator/Debug/BeaconDemo.exe \
