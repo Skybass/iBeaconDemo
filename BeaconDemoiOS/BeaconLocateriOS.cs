@@ -2,9 +2,9 @@
 using BeaconDemo;
 using Xamarin.Forms;
 using BeaconDemoiOS;
-using MonoTouch.CoreLocation;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreLocation;
+using Foundation;
+using UIKit;
 using System.Collections.Generic;
 
 [assembly: Dependency (typeof(BeaconLocateriOS))]
@@ -14,7 +14,7 @@ namespace BeaconDemoiOS
 	public class BeaconLocateriOS : IBeaconLocater
 	{
 		CLLocationManager locationManager;
-		readonly string roximityUuid = "B0C091FA-D303-11E3-94A7-1A514932AC01";
+		readonly string roximityUuid = "9930EC64-D309-11E3-94A7-1A514932AC01";
 		readonly string roximityBeaconId = "iBeacon";
 		CLBeaconRegion rBeaconRegion;
 		List<BeaconItem> beacons;
@@ -46,9 +46,11 @@ namespace BeaconDemoiOS
 		{
 			locationManager = new CLLocationManager ();
 			beacons = new List<BeaconItem> ();
+			locationManager.RequestAlwaysAuthorization ();
 
 			var rUuid = new NSUuid (roximityUuid);
 			rBeaconRegion = new CLBeaconRegion (rUuid, roximityBeaconId);
+
 
 			rBeaconRegion.NotifyEntryStateOnDisplay = true;
 			rBeaconRegion.NotifyOnEntry = true;
@@ -73,7 +75,7 @@ namespace BeaconDemoiOS
 			if (e.Region.Identifier.Equals (roximityBeaconId)) {
 				locationManager.StartRangingBeacons (rBeaconRegion);
 				var notification = new UILocalNotification { AlertBody = "Beacons are in range" };
-				UIApplication.SharedApplication.PresentLocationNotificationNow (notification);
+				UIApplication.SharedApplication.PresentLocalNotificationNow (notification);
 			} 
 		}
 

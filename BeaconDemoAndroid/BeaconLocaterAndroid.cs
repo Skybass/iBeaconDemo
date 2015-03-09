@@ -29,7 +29,7 @@ namespace BeaconDemoAndroid
 		public BeaconLocaterAndroid ()
 		{
 			beacons = new List<BeaconItem> ();
-			context = Application.Context;
+			context = Xamarin.Forms.Forms.Context;
 
 			_iBeaconManager = IBeaconManager.GetInstanceForApplication (context);
 			_monitorNotifier = new MonitorNotifier ();

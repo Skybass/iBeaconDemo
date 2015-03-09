@@ -1,9 +1,0 @@
-/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/obj/iPhone/Debug/mtouch-cache/Link/System.Core.dll
-/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/obj/iPhone/Debug/mtouch-cache/Link/BeaconDemo.exe
-/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/obj/iPhone/Debug/mtouch-cache/Link/mscorlib.dll
-/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/obj/iPhone/Debug/mtouch-cache/Link/monotouch.dll
-/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/obj/iPhone/Debug/mtouch-cache/Link/Xamarin.Forms.Core.dll
-/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/obj/iPhone/Debug/mtouch-cache/Link/System.Net.Http.dll
-/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/obj/iPhone/Debug/mtouch-cache/Link/Xamarin.Forms.Platform.iOS.dll
-/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/obj/iPhone/Debug/mtouch-cache/Link/Mono.Dynamic.Interpreter.dll
-/Users/skybass/Documents/Git/xamarin-ibeacon-demo/BeaconDemo/BeaconDemoiOS/obj/iPhone/Debug/mtouch-cache/Link/System.dll

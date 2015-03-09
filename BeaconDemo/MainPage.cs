@@ -69,12 +69,10 @@ namespace BeaconDemo
 		protected override void OnAppearing ()
 		{
 			base.OnAppearing ();
-			var timer = new Timer (1000);
-			timer.Elapsed += OnTimerElapsed;
-			timer.Start ();
+			var timer = new Timer (OnTimerElapsed, null, 0, 1000, true);
 		}
 
-		public void OnTimerElapsed(object o, ElapsedEventArgs e) {
+		public void OnTimerElapsed(object o) {
 
 			Device.BeginInvokeOnMainThread (() => {
 				var list = beaconLocater.GetAvailableBeacons();

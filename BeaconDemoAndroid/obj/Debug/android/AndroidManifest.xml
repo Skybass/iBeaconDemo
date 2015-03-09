@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.BeaconDemoAndroid">
-  <uses-sdk android:minSdkVersion="11" />
+  <uses-sdk android:targetSdkVersion="19" android:minSdkVersion="19" />
   <application android:label="BeaconDemoAndroid" android:name="mono.android.app.Application" android:debuggable="true">
     <service android:enabled="true" android:exported="true" android:isolatedProcess="false" android:label="iBeacon" android:name="com.radiusnetworks.ibeacon.service.IBeaconService">
     </service>
@@ -11,7 +11,7 @@
         <action android:name="com.BeaconDemoAndroid.DID_MONITORING" />
       </intent-filter>
     </service>
-    <activity android:label="BeaconDemoAndroid" android:name="beacondemoandroid.MainActivity">
+    <activity android:configChanges="orientation|screenSize" android:icon="@drawable/icon" android:label="ShareTest.Droid" android:name="beacondemoandroid.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
@@ -28,5 +28,6 @@
   <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
   <uses-permission android:name="android.permission.BLUETOOTH" />
   <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>

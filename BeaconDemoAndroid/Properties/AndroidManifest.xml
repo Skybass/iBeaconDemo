@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.BeaconDemoAndroid">
-	<uses-sdk />
+	<uses-sdk android:targetSdkVersion="19" android:minSdkVersion="19" />
 	<application android:label="BeaconDemoAndroid">
 		<service android:enabled="true" android:exported="true" android:isolatedProcess="false" android:label="iBeacon" android:name="com.radiusnetworks.ibeacon.service.IBeaconService">
 		</service>

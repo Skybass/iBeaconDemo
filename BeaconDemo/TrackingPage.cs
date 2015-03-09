@@ -3,7 +3,6 @@ using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Timers;
 using System.Collections.Generic;
 
 namespace BeaconDemo
@@ -47,9 +46,7 @@ namespace BeaconDemo
 
 			Content = scroll;
 
-			var timer = new Timer (1000);
-			timer.Elapsed += OnTimerElapsed;
-			timer.Start ();
+			var timer = new Timer (OnTimerElapsed, null, 0, 1000, true);
 		}
 
 		public void SetBeaconData (List<BeaconItem> beaconCollection)
@@ -59,7 +56,7 @@ namespace BeaconDemo
 			SetDirectionLabel ();
 		}
 
-		public void OnTimerElapsed(object o, ElapsedEventArgs e) {
+		public void OnTimerElapsed(object o) {
 
 			Device.BeginInvokeOnMainThread (() => {
 				var list = DependencyService.Get<IBeaconLocater>().GetAvailableBeacons();
