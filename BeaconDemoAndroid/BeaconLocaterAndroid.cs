@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 using BeaconDemoAndroid;
-using Android.App;
 using RadiusNetworks.IBeaconAndroid;
 using BeaconDemo;
 using Android.Content;
-using Android.Support.V4.App;
 
-[assembly: Dependency (typeof (BeaconLocaterAndroid))]
+[assembly: Dependency(typeof(BeaconLocaterAndroid))]
 
 namespace BeaconDemoAndroid
 {
@@ -17,42 +15,45 @@ namespace BeaconDemoAndroid
 		readonly string uuid = "B0C091FA-D303-11E3-94A7-1A514932AC01";
 		readonly string beaconId = "iBeacon";
 
-		IBeaconManager _iBeaconManager;
-		MonitorNotifier _monitorNotifier;
-		RangeNotifier _rangeNotifier;
-		Region _monitoringRegion;
-		Region _rangingRegion;
+		IBeaconManager iBeaconManager;
+		MonitorNotifier monitorNotifier;
+		RangeNotifier rangeNotifier;
+		Region monitoringRegion;
+		Region rangingRegion;
 		Context context;
 		bool paused;
 		List<BeaconItem> beacons;
 
-		public BeaconLocaterAndroid ()
+		public BeaconLocaterAndroid()
 		{
-			beacons = new List<BeaconItem> ();
-			context = Xamarin.Forms.Forms.Context;
+			beacons = new List<BeaconItem>();
+			context = Forms.Context;
 
-			_iBeaconManager = IBeaconManager.GetInstanceForApplication (context);
-			_monitorNotifier = new MonitorNotifier ();
-			_rangeNotifier = new RangeNotifier ();
+			iBeaconManager = IBeaconManager.GetInstanceForApplication(context);
+			monitorNotifier = new MonitorNotifier();
+			rangeNotifier = new RangeNotifier();
 
-			_monitoringRegion = new Region (beaconId, uuid, null, null);
-			_rangingRegion = new Region(beaconId, uuid, null, null);
+			monitoringRegion = new Region(beaconId, uuid, null, null);
+			rangingRegion = new Region(beaconId, uuid, null, null);
 
-			_iBeaconManager.Bind (this);
+			iBeaconManager.Bind(this);
 
-			_rangeNotifier.DidRangeBeaconsInRegionComplete += RangingBeaconsInRegion;
-	
+			rangeNotifier.DidRangeBeaconsInRegionComplete += RangingBeaconsInRegion;
+
 		}
 
-		public List<BeaconItem> GetAvailableBeacons() {
+		public List<BeaconItem> GetAvailableBeacons()
+		{
 			return !paused ? beacons : null;
 		}
 
-		public void PauseTracking() {
+		public void PauseTracking()
+		{
 			paused = true;
 		}
 
-		public void ResumeTracking() {
+		public void ResumeTracking()
+		{
 			paused = false;
 		}
 
@@ -60,74 +61,86 @@ namespace BeaconDemoAndroid
 		{
 			if (e.Beacons.Count > 0)
 			{
-				foreach (var b in e.Beacons) {
-					if ((ProximityType)b.Proximity != ProximityType.Unknown) {
+				foreach (var b in e.Beacons)
+				{
+					if ((ProximityType)b.Proximity != ProximityType.Unknown)
+					{
 
 						var exists = false;
-						for (int i=0; i<beacons.Count; i++) {
-							if (beacons[i].Minor.Equals(b.Minor.ToString())) {
-								beacons[i].CurrentDistance = Math.Round (b.Accuracy, 2);
-								SetProximity (b, beacons [i]);
+						for (int i = 0; i < beacons.Count; i++)
+						{
+							if (beacons[i].Minor.Equals(b.Minor.ToString()))
+							{
+								beacons[i].CurrentDistance = Math.Round(b.Accuracy, 2);
+								SetProximity(b, beacons[i]);
 								exists = true;
 							}
 						}
 
-						if (!exists) {
-							var newBeacon = new BeaconItem {
-								Minor = b.Minor.ToString (),
+						if (!exists)
+						{
+							var newBeacon = new BeaconItem
+							{
+								Minor = b.Minor.ToString(),
 								Name = "",
-								CurrentDistance = Math.Round (b.Accuracy, 2)
+								CurrentDistance = Math.Round(b.Accuracy, 2)
 							};
-							SetProximity (b, newBeacon);
-							beacons.Add (newBeacon);
+							SetProximity(b, newBeacon);
+							beacons.Add(newBeacon);
 						}
 					}
 				}
 			}
 		}
 
-		void SetProximity(IBeacon source, BeaconItem dest) {
+		void SetProximity(IBeacon source, BeaconItem dest)
+		{
 
 			Proximity p = Proximity.Unknown;
 
-			switch((ProximityType)source.Proximity) {
-			case ProximityType.Immediate:
-				p = Proximity.Immediate;
-				break;
-			case ProximityType.Near:
-				p = Proximity.Near;
-				break;
-			case ProximityType.Far:
-				p = Proximity.Far;
-				break;
+			switch ((ProximityType)source.Proximity)
+			{
+				case ProximityType.Immediate:
+					p = Proximity.Immediate;
+					break;
+				case ProximityType.Near:
+					p = Proximity.Near;
+					break;
+				case ProximityType.Far:
+					p = Proximity.Far;
+					break;
 			}
 
-			if (p > dest.Proximity || p < dest.Proximity) {
+			if (p > dest.Proximity || p < dest.Proximity)
+			{
 				dest.ProximityChangeTimestamp = DateTime.Now;
-			} 
+			}
 
 			dest.Proximity = p;
 		}
 
 		public void OnIBeaconServiceConnect()
 		{
-			_iBeaconManager.SetMonitorNotifier(_monitorNotifier);
-			_iBeaconManager.SetRangeNotifier(_rangeNotifier);
+			iBeaconManager.SetMonitorNotifier(monitorNotifier);
+			iBeaconManager.SetRangeNotifier(rangeNotifier);
 
-			_iBeaconManager.StartMonitoringBeaconsInRegion(_monitoringRegion);
-			_iBeaconManager.StartRangingBeaconsInRegion(_rangingRegion);
+			iBeaconManager.StartMonitoringBeaconsInRegion(monitoringRegion);
+			iBeaconManager.StartRangingBeaconsInRegion(rangingRegion);
 		}
 
-		public Context ApplicationContext {
-			get {return this.context;}
+		public Context ApplicationContext
+		{
+			get { return this.context; }
 		}
 
-		public bool BindService(Intent intent, IServiceConnection connection, Bind bind) {
-			return context.BindService (intent, connection, bind);
+		public bool BindService(Intent intent, IServiceConnection connection, Bind bind)
+		{
+			return context.BindService(intent, connection, bind);
 		}
 
-		public void UnbindService(IServiceConnection connection) {
-			context.UnbindService (connection);
+		public void UnbindService(IServiceConnection connection)
+		{
+			context.UnbindService(connection);
 		}
 	}
 }

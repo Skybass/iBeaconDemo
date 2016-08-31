@@ -1,7 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-using System.Timers;
-using System.Collections.Generic;
+﻿using Xamarin.Forms;
 using System.Collections.ObjectModel;
 
 namespace BeaconDemo
@@ -17,71 +14,85 @@ namespace BeaconDemo
 		ObservableCollection<BeaconItem> beaconCollection;
 		TrackingPage trackingPage;
 
-		public MainPage ()
+		public MainPage()
 		{
 			Title = "Available Beacons";
 
-			trackingPage = new TrackingPage ();
+			trackingPage = new TrackingPage();
 
-			listView = new ListView {
+			listView = new ListView
+			{
 				RowHeight = 100,
 			};
-			listView.ItemTemplate = new DataTemplate (typeof(BeaconCell));
+			listView.ItemTemplate = new DataTemplate(typeof(BeaconCell));
 
-			beaconLocater = DependencyService.Get<IBeaconLocater> ();
-			beaconCollection = new ObservableCollection<BeaconItem> ();
+			beaconLocater = DependencyService.Get<IBeaconLocater>();
+			beaconCollection = new ObservableCollection<BeaconItem>();
 			listView.ItemsSource = beaconCollection;
 
-			var trackingButton = new Button {
+			var trackingButton = new Button
+			{
 				Text = "Start Tracking",
 				HorizontalOptions = LayoutOptions.Center
 			};
 
-			trackingButton.Clicked += (sender, args) => {
+			trackingButton.Clicked += (sender, args) =>
+			{
 				Navigation.PushAsync(trackingPage);
 			};
 
-			tableLayout = new StackLayout {
+			tableLayout = new StackLayout
+			{
 				VerticalOptions = LayoutOptions.FillAndExpand,
-				Children = {trackingButton, listView}
+				Children = { trackingButton, listView }
 			};
 
-			searchingLabel = new Label {
+			searchingLabel = new Label
+			{
 				Text = "Searching for beacons",
-				YAlign = TextAlignment.Center,
-				XAlign = TextAlignment.Center
+				VerticalTextAlignment = TextAlignment.Center,
+				HorizontalTextAlignment = TextAlignment.Center
 			};
 
-			spinner = new ActivityIndicator {
+			spinner = new ActivityIndicator
+			{
 				IsRunning = true,
 				Color = Color.Gray,
 			};
 
-			searchingLayout = new StackLayout {
+			searchingLayout = new StackLayout
+			{
 				VerticalOptions = LayoutOptions.Center,
 				HorizontalOptions = LayoutOptions.Center,
-				Children = {spinner, searchingLabel}
+				Children = { spinner, searchingLabel }
 			};
 
 			Content = searchingLayout;
 		}
 
-		protected override void OnAppearing ()
+		protected override void OnAppearing()
 		{
-			base.OnAppearing ();
-			var timer = new Timer (OnTimerElapsed, null, 0, 1000, true);
+			base.OnAppearing();
+			var timer = new Timer(OnTimerElapsed, null, 0, 1000, true);
 		}
 
-		public void OnTimerElapsed(object o) {
+		public void OnTimerElapsed(object o)
+		{
 
-			Device.BeginInvokeOnMainThread (() => {
+			Device.BeginInvokeOnMainThread(() =>
+			{
 				var list = beaconLocater.GetAvailableBeacons();
 
-				if (list == null){
+				if (list == null)
+				{
 					//do nothing
-				} else if (list.Count == 0) {
+				}
+				else if (list.Count == 0)
+				{
 					Content = searchingLayout;
-				} else if (list.Count > 0) {
+				}
+				else if (list.Count > 0)
+				{
 					listView.ItemsSource = null;
 					listView.ItemsSource = list;
 					Content = tableLayout;

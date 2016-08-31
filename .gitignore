@@ -471,3 +471,7 @@ BeaconDemoAndroid/obj/Debug/android/src/beacondemoandroid/beacondemoandroid/R.ja
 BeaconDemoAndroid/obj/Debug/android/src/beacondemoandroid/MainActivity.java
 BeaconDemoAndroid/obj/Debug/android/bin/classes
 BeaconDemoAndroid/obj/Debug/__library_projects__/FormsViewGroup
+/BeaconDemoiOS/obj
+/BeaconDemoAndroid/obj/Release
+/.droidres
+/BeaconDemo.userprefs
