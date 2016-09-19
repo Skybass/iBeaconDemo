@@ -475,3 +475,6 @@ BeaconDemoAndroid/obj/Debug/__library_projects__/FormsViewGroup
 /BeaconDemoAndroid/obj/Release
 /.droidres
 /BeaconDemo.userprefs
+/BeaconDemoiOS/bin
+/BeaconDemoAndroid/obj
+/BeaconDemoAndroid/bin

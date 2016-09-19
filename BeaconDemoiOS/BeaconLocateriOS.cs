@@ -6,6 +6,7 @@ using CoreLocation;
 using Foundation;
 using UIKit;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 [assembly: Dependency(typeof(BeaconLocateriOS))]
 
@@ -14,7 +15,7 @@ namespace BeaconDemoiOS
 	public class BeaconLocateriOS : IBeaconLocater
 	{
 		CLLocationManager locationManager;
-		readonly string roximityUuid = "9930EC64-D309-11E3-94A7-1A514932AC01";
+		readonly string roximityUuid = "E5075A5C-AF20-4496-9501-7F449091A4EC";
 		readonly string roximityBeaconId = "iBeacon";
 		CLBeaconRegion rBeaconRegion;
 		List<BeaconItem> beacons;
@@ -25,6 +26,26 @@ namespace BeaconDemoiOS
 			SetupBeaconRanging();
 			locationManager.StartMonitoring(rBeaconRegion);
 			locationManager.RequestState(rBeaconRegion);
+
+			if (locationManager == null)
+			{
+				locationManager = new CLLocationManager();
+				locationManager.DesiredAccuracy = CLLocation.AccuracyBest;
+				locationManager.HeadingFilter = 1;
+				locationManager.UpdatedHeading += LocationManager_UpdatedHeading; ;
+			}
+			else {
+				locationManager.DesiredAccuracy = CLLocation.AccuracyBest;
+				locationManager.HeadingFilter = 1;
+				locationManager.UpdatedHeading += LocationManager_UpdatedHeading; ;
+			}
+			locationManager.StartUpdatingHeading();
+
+		}
+
+		void LocationManager_UpdatedHeading(object sender, CLHeadingUpdatedEventArgs e)
+		{
+			Debug.WriteLine(e.NewHeading.TrueHeading);
 		}
 
 		public void PauseTracking()
